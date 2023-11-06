@@ -24,7 +24,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String selectedHouse = "Connaught";
 
 
-  var _gradeList = ["8", "9", "10", "11", "12"];
+  final _gradeList = ["8", "9", "10", "11", "12"];
   final _classList = ["R", "E", "D", "A", "M", "H"];
   final _houseList = ["Connaught", "Leinster", "Munster", "Ulster"];
 
@@ -90,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Image.asset('lib/images/ReddamLogo.jpg'),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
 
               //name
               MyTextField(
@@ -124,6 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               const SizedBox(height: 10),
 
+              //class drop down
               CustomDropdown(
                 items: _classList,
                 value: selectedClass,
@@ -137,6 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
               const SizedBox(height: 10),
 
+              //house drop down
               CustomDropdown(
                 items: _houseList,
                 value: selectedHouse,
@@ -147,39 +149,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 labelText: "House",
               ),
-
-
-
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-              //   child: DropdownButtonFormField(
-              //     // Initial Value
-              //     value: dropdownvalue,
-              //     // Down Arrow Icon
-              //     // icon: const Icon(Icons.keyboard_arrow_down),
-
-              //     // Array list of items
-              //     items: _gradeList.map((String items) {
-              //       return DropdownMenuItem(
-              //         value: items,
-              //         child: Text(items),
-              //       );
-              //     }).toList(),
-              //     // After selecting the desired option,it will
-              //     // change button value to selected value
-              //     onChanged: (String? newValue) {
-              //       setState(() {
-              //         dropdownvalue = newValue!;
-              //       });
-              //     },
-
-              //     icon: const Icon(Icons.arrow_drop_down_circle,
-              //         color: Color.fromARGB(255, 141, 122, 16)),
-              //     decoration: const InputDecoration(
-              //         labelText: "Grade", border: OutlineInputBorder()),
-                    
-              //   ),
-              // ),
 
               const SizedBox(height: 10),
 

@@ -1,3 +1,4 @@
+import 'package:cce_reddam_house/Screens/register_page.dart';
 import 'package:flutter/material.dart';
 
 import 'loginPage.dart';
@@ -28,9 +29,10 @@ class _LoginOrRegisterPageState extends State<LoginOrRegisterPage> {
       return LoginPage(
         onTap: togglePages,
       );
-    } else 
-    {
-      return RegisterPage();
+    } else{
+      return RegisterPage(
+        onTap: togglePages,
+      );
     }
   }
 }

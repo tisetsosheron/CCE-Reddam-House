@@ -1,4 +1,5 @@
 import 'package:cce_reddam_house/Screens/loginPage.dart';
+import 'package:cce_reddam_house/Screens/login_or_register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class AuthPage extends StatelessWidget {
         
         //user is not logged in
         else {
-          return LoginPage();
+          return LoginOrRegisterPage();
         }
       },
     ));

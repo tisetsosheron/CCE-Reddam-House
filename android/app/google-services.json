@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "812177127629",
+    "project_id": "reddamhouse-afb7a",
+    "storage_bucket": "reddamhouse-afb7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812177127629:android:04ae8a707fafce72e6d184",
+        "android_client_info": {
+          "package_name": "com.example.cce_reddam_house"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn9I29va00JUeNcNKau8D9o3UtOdI8ln4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

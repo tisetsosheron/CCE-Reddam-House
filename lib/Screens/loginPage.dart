@@ -4,6 +4,8 @@ import 'package:cce_reddam_house/components/textField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'forgotPassword.dart';
+
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
   const LoginPage({super.key, this.onTap});
@@ -79,11 +81,11 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 30),
 
-              const Text('Welcome Back!',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 19, 55, 85),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
+              // const Text('Welcome Back!',
+              //     style: TextStyle(
+              //         color: Color.fromARGB(255, 19, 55, 85),
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.bold)),
 
               const SizedBox(height: 25),
 
@@ -110,10 +112,19 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 25.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
-                      Text('Forgot Password?',
-                          style:
-                              TextStyle(color: Color.fromARGB(255, 18, 52, 78)))
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ForgotPasswordPage();
+                          }));
+                        },
+                        child: Text('Forgot Password?',
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold)),
+                      )
                     ],
                   )),
 
@@ -121,6 +132,7 @@ class _LoginPageState extends State<LoginPage> {
 
               MyButton(
                 onTap: signUserIn,
+                text: 'Login',
               ),
 
               const SizedBox(height: 50),

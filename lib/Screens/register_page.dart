@@ -1,5 +1,6 @@
 import 'package:cce_reddam_house/components/myButton.dart';
 import 'package:cce_reddam_house/components/textField.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,12 +18,12 @@ class _RegisterPageState extends State<RegisterPage> {
   //Text controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
   String selectedGrade = "8";
   String selectedClass = "R";
   String selectedHouse = "Connaught";
-
 
   final _gradeList = ["8", "9", "10", "11", "12"];
   final _classList = ["R", "E", "D", "A", "M", "H"];
@@ -31,28 +32,55 @@ class _RegisterPageState extends State<RegisterPage> {
   //sign user up method
   void signUserUp() async {
     //show loading circle
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+    // showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return const Center(
+    //         child: CircularProgressIndicator(),
+    //       );
+    //     });
 
     //try creating a user
-
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-      //Pop loading circle
-      Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      //Pop loading circle
-      Navigator.pop(context);
+      //Check if password is confirmed
+      if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: passwordController.text.trim(),
+        );
 
+        //add user details
+        addUserDetails(
+          nameController.text.trim(),
+          surnameController.text.trim(),
+          emailController.text.trim(),
+          selectedGrade,
+          selectedClass,
+          selectedHouse
+        );
+        
+      } else {
+        //show error message
+        showErrorMessage("Passwords don't match");
+      }
+      // Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      // Navigator.pop(context);
       showErrorMessage(e.code.toLowerCase());
     }
   }
+
+    Future addUserDetails(String name, String surname, String email,
+          String grade, String classL, String house) async {
+        await FirebaseFirestore.instance.collection('Users').add({
+          'name': name,
+          'surname': surname,
+          'email': email,
+          'grade': grade,
+          'class': classL,
+          'house': house,
+        });
+      }
 
   //show error message
   void showErrorMessage(String message) {
@@ -130,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 value: selectedClass,
                 onChanged: (newValue) {
                   setState(() {
-                   selectedClass = newValue;
+                    selectedClass = newValue;
                   });
                 },
                 labelText: "Class",
@@ -144,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 value: selectedHouse,
                 onChanged: (newValue) {
                   setState(() {
-                   selectedHouse = newValue;
+                    selectedHouse = newValue;
                   });
                 },
                 labelText: "House",
@@ -168,11 +196,18 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: true,
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 10),
 
-              MyButton(
-                onTap: signUserUp,
+              //confirm password
+              MyTextField(
+                controller: confirmPasswordController,
+                hintText: 'Confirm Password',
+                obscureText: true,
               ),
+
+              const SizedBox(height: 10),
+
+              MyButton(onTap: signUserUp, text: 'Sign Up'),
             ],
           ),
         ),

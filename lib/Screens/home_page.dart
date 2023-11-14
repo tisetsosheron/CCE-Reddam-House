@@ -13,18 +13,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
-  //document IDs
-  List<String> docIDs = [];
-
-  //get docIDs
-  Future getDocID() async {
-    await FirebaseFirestore.instance.collection('Users').get().then(
-          (snapshot) => snapshot.docs.forEach((document) {
-            print(document.reference);
-            docIDs.add(document.reference.id);
-          }),
-        );
-  }
 
   //navigate to ptofile page
   void goToProfilePage() {
@@ -48,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 141, 122, 16),
+          backgroundColor: Color.fromARGB(255, 3, 34, 59)
         ),
         drawer: MyDrawer(
           onProfileTap: goToProfilePage,

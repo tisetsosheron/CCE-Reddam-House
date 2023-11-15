@@ -1,6 +1,7 @@
 import 'package:cce_reddam_house/Screens/authPage.dart';
 import 'package:cce_reddam_house/Screens/register_page.dart';
 import 'package:cce_reddam_house/Screens/uploadTimetable.dart';
+import 'package:cce_reddam_house/Screens/log_hours.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';

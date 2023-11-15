@@ -32,55 +32,68 @@ class _RegisterPageState extends State<RegisterPage> {
   //sign user up method
   void signUserUp() async {
     //show loading circle
-    // showDialog(
-    //     context: context,
-    //     builder: (context) {
-    //       return const Center(
-    //         child: CircularProgressIndicator(),
-    //       );
-    //     });
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    //Check if password is confirmed
+    if (passwordController.text != confirmPasswordController.text) {
+      Navigator.pop(context);
+      showErrorMessage("Passwords don't match");
+      return;
+    }
 
     //try creating a user
     try {
-      //Check if password is confirmed
-      if (passwordController.text == confirmPasswordController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        );
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
 
-        //add user details
-        addUserDetails(
-          nameController.text.trim(),
-          surnameController.text.trim(),
-          emailController.text.trim(),
-          selectedGrade,
-          selectedClass,
-          selectedHouse
-        );
-        
-      } else {
-        //show error message
-        showErrorMessage("Passwords don't match");
-      }
-      // Navigator.pop(context);
+      FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userCredential.user!.email)
+          .set({
+        'name': nameController.text.trim(),
+        'surname': surnameController.text.trim(),
+        'email': emailController.text.trim(),
+        'grade': selectedGrade,
+        'class': selectedClass,
+        'house': selectedHouse,
+      });
+
+      //add user details
+      // addUserDetails(
+      //     nameController.text.trim(),
+      //     surnameController.text.trim(),
+      //     emailController.text.trim(),
+      //     selectedGrade,
+      //     selectedClass,
+      //     selectedHouse);
+
+      if (context.mounted) Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      // Navigator.pop(context);
+      Navigator.pop(context);
       showErrorMessage(e.code.toLowerCase());
     }
   }
 
-    Future addUserDetails(String name, String surname, String email,
-          String grade, String classL, String house) async {
-        await FirebaseFirestore.instance.collection('Users').add({
-          'name': name,
-          'surname': surname,
-          'email': email,
-          'grade': grade,
-          'class': classL,
-          'house': house,
-        });
-      }
+  Future addUserDetails(String name, String surname, String email, String grade,
+      String classL, String house) async {
+    await FirebaseFirestore.instance.collection('Users').add({
+      'name': name,
+      'surname': surname,
+      'email': email,
+      'grade': grade,
+      'class': classL,
+      'house': house,
+    });
+  }
 
   //show error message
   void showErrorMessage(String message) {

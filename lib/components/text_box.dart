@@ -16,7 +16,7 @@ class MyTextBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: Color.fromARGB(255, 180, 177, 177),
         borderRadius: BorderRadius.circular(8),
       ),
       padding: EdgeInsets.only(

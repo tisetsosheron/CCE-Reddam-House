@@ -1,3 +1,5 @@
+import 'package:cce_reddam_house/Screens/home_page.dart';
+import 'package:cce_reddam_house/Screens/teacher_register.dart';
 import 'package:cce_reddam_house/components/myButton.dart';
 import 'package:cce_reddam_house/components/textField.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,7 +17,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  //Text controllers
+  // Text controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -28,26 +30,28 @@ class _RegisterPageState extends State<RegisterPage> {
   final _gradeList = ["8", "9", "10", "11", "12"];
   final _classList = ["R", "E", "D", "A", "M", "H"];
   final _houseList = ["Connaught", "Leinster", "Munster", "Ulster"];
+  
 
-  //sign user up method
+  // Sign up method for both students and teachers
   void signUserUp() async {
-    //show loading circle
+    // Show loading circle
     showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
 
-    //Check if password is confirmed
+    // Check if password is confirmed
     if (passwordController.text != confirmPasswordController.text) {
       Navigator.pop(context);
       showErrorMessage("Passwords don't match");
       return;
     }
 
-    //try creating a user
+    // Try creating a user
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -55,59 +59,44 @@ class _RegisterPageState extends State<RegisterPage> {
         password: passwordController.text.trim(),
       );
 
-      FirebaseFirestore.instance
-          .collection('Users')
-          .doc(userCredential.user!.email)
-          .set({
+
+      // Save user data
+      FirebaseFirestore.instance.collection('Users').doc(userCredential.user!.email).set({
         'name': nameController.text.trim(),
         'surname': surnameController.text.trim(),
         'email': emailController.text.trim(),
         'grade': selectedGrade,
         'class': selectedClass,
         'house': selectedHouse,
+        'role': 'Student',
       });
 
-      //add user details
-      // addUserDetails(
-      //     nameController.text.trim(),
-      //     surnameController.text.trim(),
-      //     emailController.text.trim(),
-      //     selectedGrade,
-      //     selectedClass,
-      //     selectedHouse);
-
       if (context.mounted) Navigator.pop(context);
+      Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorMessage(e.code.toLowerCase());
     }
   }
 
-  Future addUserDetails(String name, String surname, String email, String grade,
-      String classL, String house) async {
-    await FirebaseFirestore.instance.collection('Users').add({
-      'name': name,
-      'surname': surname,
-      'email': email,
-      'grade': grade,
-      'class': classL,
-      'house': house,
-    });
-  }
-
-  //show error message
+  // Show error message
   void showErrorMessage(String message) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Center(
-              child: Text(message,
-                  style:
-                      const TextStyle(color: Color.fromARGB(255, 8, 35, 58))),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Center(
+            child: Text(
+              message,
+              style: const TextStyle(color: Color.fromARGB(255, 8, 35, 58)),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   @override

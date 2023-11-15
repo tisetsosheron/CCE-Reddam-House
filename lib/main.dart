@@ -1,6 +1,9 @@
 import 'package:cce_reddam_house/Screens/authPage.dart';
 import 'package:cce_reddam_house/Screens/register_page.dart';
 import 'package:cce_reddam_house/Screens/uploadTimetable.dart';
+import 'package:cce_reddam_house/Screens/award_page.dart';
+import 'package:cce_reddam_house/Screens/award_class.dart';
+import 'package:cce_reddam_house/Screens/award_grade.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TimeTablePage(),
+      home: AwardHoursPage(),
     );
   }
 }

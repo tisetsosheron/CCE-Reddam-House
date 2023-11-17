@@ -1,4 +1,3 @@
-import 'package:cce_reddam_house/Screens/profile_page.dart';
 import 'package:cce_reddam_house/Screens/teacher_profile.dart';
 import 'package:cce_reddam_house/components/drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -39,6 +38,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
         drawer: MyDrawer(
           onProfileTap: goToProfilePage,
           onSignOut: signUserOut,
+          onLogHours: null,
         ),
         body: Center(
           child: Column(

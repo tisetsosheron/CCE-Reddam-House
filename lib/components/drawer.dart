@@ -5,10 +5,12 @@ import 'My_list_tile.dart';
 class MyDrawer extends StatelessWidget {
   final void Function()? onProfileTap;
   final void Function()? onSignOut;
+   final void Function()? onLogHours;
   const MyDrawer({
     super.key,
     required this.onProfileTap,
     required this.onSignOut,
+    required this.onLogHours
     });
 
   @override
@@ -33,6 +35,10 @@ class MyDrawer extends StatelessWidget {
             ),
             //profile list tile
             MyListTile(icon: Icons.person, text: 'P R O F I L E', onTap: onProfileTap),
+              MyListTile(
+              icon: Icons.home,
+              text: 'L O G   H O U R S',
+              onTap: onLogHours),
                 ],),
 
                 //logout list tile

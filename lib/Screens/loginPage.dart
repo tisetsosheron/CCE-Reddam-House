@@ -1,5 +1,6 @@
+import 'package:cce_reddam_house/Screens/register_page.dart';
+import 'package:cce_reddam_house/Screens/teacher_register.dart';
 import 'package:cce_reddam_house/components/myButton.dart';
-import 'package:cce_reddam_house/components/square.dart';
 import 'package:cce_reddam_house/components/textField.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -135,7 +136,51 @@ class _LoginPageState extends State<LoginPage> {
                 text: 'Login',
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 25),
+
+              //apple and google signs
+
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: const [
+              //     //google button
+              //     SquareTile(imagePath: 'lib/images/google.jpg'),
+
+              //     SizedBox(height: 25),
+
+              //     //apple button
+              //     SquareTile(imagePath: 'lib/images/R.png'),
+              //   ],
+              // ),
+
+          
+
+              const SizedBox(height: 25),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Student? ',
+                  style:TextStyle(fontSize: 15)),
+                  SizedBox(height: 10),
+                  GestureDetector(
+                      onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return RegisterPage(); // Navigate to student registration page
+                      }));
+                    },
+
+                    child: const Text(
+                      'Register here',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.blue, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 25),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -148,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
-                        'Or continue with',
+                        'Or',
                         style:
                             TextStyle(color: Color.fromARGB(255, 13, 50, 80)),
                       ),
@@ -159,40 +204,31 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
 
-              const SizedBox(height: 50),
-
-              //apple and google signs
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  //google button
-                  SquareTile(imagePath: 'lib/images/google.jpg'),
-
-                  SizedBox(height: 25),
-
-                  //apple button
-                  SquareTile(imagePath: 'lib/images/R.png'),
-                ],
-              ),
-
-              const SizedBox(height: 40),
+              const SizedBox(height: 25),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('No Account yet?'),
-                  SizedBox(height: 4),
+                  const Text('Teacher? ',
+                  style:TextStyle(fontSize: 15)),
+                  const SizedBox(height: 10),
                   GestureDetector(
-                    onTap: widget.onTap,
+                      onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                        return TeacherRegisterPage(); // Navigate to student registration page
+                      }));
+                    },
+
                     child: const Text(
                       'Register here',
                       style: TextStyle(
+                        fontSize: 15,
                           color: Colors.blue, fontWeight: FontWeight.bold),
+    
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

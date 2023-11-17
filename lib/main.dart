@@ -1,4 +1,5 @@
 import 'package:cce_reddam_house/Screens/authPage.dart';
+import 'package:cce_reddam_house/Screens/home_page.dart';
 import 'package:cce_reddam_house/Screens/register_page.dart';
 import 'package:cce_reddam_house/Screens/uploadTimetable.dart';
 import 'package:cce_reddam_house/Screens/award_page.dart';

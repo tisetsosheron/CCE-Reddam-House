@@ -69,7 +69,8 @@ class _LogHoursPageState extends State<LogHoursPage> {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => HomePage(), // Navigate to HomePage
                 ));
-              })),
+              })
+              ),
       backgroundColor: Colors.white,
       body: SafeArea(
           child: Center(

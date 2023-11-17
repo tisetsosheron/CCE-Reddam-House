@@ -33,15 +33,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void goToTimetablePage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LearnersTtablePage(),
-      ),
-    );
-  }
-
   final user = FirebaseAuth.instance.currentUser;
 
   //navigate to profile page

@@ -1,4 +1,5 @@
 import 'package:cce_reddam_house/Screens/authPage.dart';
+import 'package:cce_reddam_house/Screens/displayClass.dart';
 import 'package:cce_reddam_house/Screens/register_page.dart';
 import 'package:cce_reddam_house/Screens/loginPage.dart';
 import 'package:cce_reddam_house/Screens/uploadTimetable.dart';
@@ -29,8 +30,8 @@ class _AwardClassPageState extends State<AwardClassPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Award Class'),
-        backgroundColor: Color.fromARGB(255, 141, 122, 16),
+          title: Text('Award Class'),
+          backgroundColor: Color.fromARGB(255, 141, 122, 16),
           leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
@@ -53,7 +54,6 @@ class _AwardClassPageState extends State<AwardClassPage> {
               fontSize: 16,
             ),
           ),
-
 
           const SizedBox(height: 20),
           //drop down for the type of grade
@@ -91,7 +91,6 @@ class _AwardClassPageState extends State<AwardClassPage> {
             labelText: "Please select a class",
           ),
 
-
           const SizedBox(height: 30),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -99,12 +98,14 @@ class _AwardClassPageState extends State<AwardClassPage> {
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) =>
-                        LoginPage(), // Replace HomePage with your actual homepage widget
+                    builder: (context) => ClassDetailsPage(
+                      selectedGrade: selectedGrade,
+                      selectedClass: selectedClass,
+                    ), // Replace HomePage with your actual homepage widget
                   ),
                 );
               },
-              child: Text('Submit'),
+              child: Text('Get Learners'),
               style: ElevatedButton.styleFrom(
                 primary:
                     Color.fromARGB(255, 141, 122, 16), // Change color as needed
@@ -114,10 +115,6 @@ class _AwardClassPageState extends State<AwardClassPage> {
           const SizedBox(height: 10),
         ]),
       ))),
-
-
-         
-      
     );
   }
 }

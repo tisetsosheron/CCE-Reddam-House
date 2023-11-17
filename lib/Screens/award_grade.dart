@@ -1,4 +1,5 @@
 import 'package:cce_reddam_house/Screens/authPage.dart';
+import 'package:cce_reddam_house/Screens/displayStudents.dart';
 import 'package:cce_reddam_house/Screens/register_page.dart';
 import 'package:cce_reddam_house/Screens/loginPage.dart';
 import 'package:cce_reddam_house/Screens/uploadTimetable.dart';
@@ -81,11 +82,11 @@ class _AwardGradePageState extends State<AwardGradePage> {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) =>
-                        LoginPage(), // Replace HomePage with your actual homepage widget
+                        StudentDetailsPage(selectedGrade: selectedGrade), // Replace HomePage with your actual homepage widget
                   ),
                 );
               },
-              child: Text('Submit'),
+              child: Text('Get Learners'),
               style: ElevatedButton.styleFrom(
                 primary:
                     Color.fromARGB(255, 141, 122, 16), // Change color as needed

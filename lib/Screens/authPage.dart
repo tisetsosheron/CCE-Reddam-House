@@ -1,6 +1,6 @@
-import 'package:cce_reddam_house/Screens/loginPage.dart';
+
 import 'package:cce_reddam_house/Screens/login_or_register.dart';
-import 'package:cce_reddam_house/Screens/teacher_homepage.dart';
+import 'package:cce_reddam_house/Screens/teacher_home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

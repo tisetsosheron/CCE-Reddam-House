@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:cce_reddam_house/Screens/loginPage.dart';
+import 'package:cce_reddam_house/Screens/home_page.dart';
 import 'package:cce_reddam_house/components/elevated_button.dart';
 import 'package:cce_reddam_house/components/textField.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,8 +22,9 @@ class LogHoursPage extends StatefulWidget {
 }
 
 class _LogHoursPageState extends State<LogHoursPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  //final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final currentUser = FirebaseAuth.instance.currentUser!;
 
   final hoursController = TextEditingController();
   final receiptController = TextEditingController();
@@ -106,7 +107,7 @@ class _LogHoursPageState extends State<LogHoursPage> {
     });
   }
 
-  Future uploadFiles() async {
+  Future uploadFiles(BuildContext context) async {
     if (file == null && image == null) return;
 
     if (file != null) {
@@ -127,16 +128,8 @@ class _LogHoursPageState extends State<LogHoursPage> {
     final snapshot2 = await taskImage!.whenComplete(() {});
     final imageURL = await snapshot2.ref.getDownloadURL();
 
-    // Show the "Submitted" message in a Snackbar
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //   SnackBar(
-    //     content: Text('Submitted'),
-    //     duration: Duration(seconds: 2), // Adjust the duration as needed
-    //   ),
-    // );
-
     // Store the URLs and other information in Firestore
-    await _firestore.collection('logged_hours').add({
+    await _firestore.collection('logged_hours').doc(currentUser.email!).set({
       'type_hour': selectedHour,
       'activity': selectedActivity,
       'hours': hoursController.text,
@@ -144,8 +137,36 @@ class _LogHoursPageState extends State<LogHoursPage> {
       'file_url': fileURL,
       'image_url': imageURL,
     });
+
+    // Clear the text controllers and reset selected file and image after successful upload
+
+    // Show the "Submitted" message in a Snackbar
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Submitted'),
+        duration: Duration(seconds: 2),
+        action: SnackBarAction(
+          label: 'OK',
+          onPressed: () {
+            // Navigate to the homepage after the Snackbar is dismissed
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => HomePage(),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+    selectedHour = "";
+    selectedActivity = "";
+    hoursController.clear();
+    receiptController.clear();
+    setState(() {
+      file = null;
+      image = null;
+    });
   }
-  // Reset the selected file and image after upload
 
   @override
   Widget build(BuildContext context) {
@@ -265,7 +286,7 @@ class _LogHoursPageState extends State<LogHoursPage> {
           ButtonWidget(
             icon: Icons.upload,
             text: "Submit",
-            onClicked: uploadFiles,
+            onClicked: () => uploadFiles(context),
           ),
         ]),
       ))),

@@ -12,7 +12,7 @@ class TeacherProfilePage extends StatefulWidget {
 
 class _TeacherProfilePageState extends State<TeacherProfilePage> {
   final currentUser = FirebaseAuth.instance.currentUser!;
-  final teachersCollection = FirebaseFirestore.instance.collection("Teachers");
+  final teachersCollection = FirebaseFirestore.instance.collection("Users");
 
   Future<void> editField(String field) async {
     String newValue = "";
@@ -116,14 +116,11 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                     onPressed: () => editField('surname'),
                   ),
 
-                      
                   MyTextBox(
                     text: currentUser.email!,
                     sectionName: 'email',
                     onPressed: () => editField('email'),
                   ),
-
-                  
 
                   //grade
                   MyTextBox(
@@ -131,10 +128,6 @@ class _TeacherProfilePageState extends State<TeacherProfilePage> {
                     sectionName: 'Reference Number',
                     onPressed: () => editField('reference'),
                   ),
-
-
-                
-
                 ],
               );
               //}

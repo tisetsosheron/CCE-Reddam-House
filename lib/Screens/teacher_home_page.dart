@@ -2,6 +2,7 @@ import 'package:cce_reddam_house/Screens/profile_page.dart';
 import 'package:cce_reddam_house/components/drawer.dart';
 import 'package:cce_reddam_house/Screens/view_receipts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cce_reddam_house/Screens/uploadTimetable.dart';
 import 'package:cce_reddam_house/Screens/teacher_policy.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +16,14 @@ class TeacherHomePage extends StatefulWidget {
 }
 
 class _TeacherHomePageState extends State<TeacherHomePage> {
-  // void goToUploadPage() {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => TimeTablePage(),
-  //     ),
-  //   );
-  // }
+  void goToUploadPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TimeTablePage(),
+      ),
+    );
+  }
 
   void goToPolicyPage() {
     Navigator.push(
@@ -86,24 +87,27 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
               padding: EdgeInsets.all(18.0),
               child: Center(
                   child: Wrap(spacing: 20.0, runSpacing: 20.0, children: [
-                SizedBox(
-                    width: 140.0,
-                    height: 180.0,
-                    child: Card(
-                      color: Color(0xffa49831),
-                      child: Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: Column(children: [
-                            Image.asset('lib/images/ttable.png',
-                                width: 40.0, height: 40.0),
-                            SizedBox(height: 20.0),
-                            Text("Timetable",
-                                style: TextStyle(
-                                  color: Color.fromARGB(255, 3, 34, 59),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                )),
-                          ])),
+                InkWell(
+                    onTap: goToUploadPage,
+                    child: SizedBox(
+                      width: 140.0,
+                      height: 180.0,
+                      child: Card(
+                        color: Color(0xffa49831),
+                        child: Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Column(children: [
+                              Image.asset('lib/images/ttable.png',
+                                  width: 40.0, height: 40.0),
+                              SizedBox(height: 20.0),
+                              Text("Timetable",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 3, 34, 59),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                  )),
+                            ])),
+                      ),
                     )),
                 InkWell(
                   onTap: goToReceipts,

@@ -12,10 +12,11 @@ class ClassDetailsPage extends StatefulWidget {
   final String selectedClass;
   final Function()? onTap;
 
-  const ClassDetailsPage({Key? key,
-   required this.selectedGrade,
-   required this.selectedClass,
-  this.onTap});
+  const ClassDetailsPage(
+      {Key? key,
+      required this.selectedGrade,
+      required this.selectedClass,
+      this.onTap});
 
   @override
   State<ClassDetailsPage> createState() => _ClassDetailsPage();
@@ -24,6 +25,8 @@ class ClassDetailsPage extends StatefulWidget {
 class _ClassDetailsPage extends State<ClassDetailsPage> {
   final currentUser = FirebaseAuth.instance.currentUser;
   final usersCollection = FirebaseFirestore.instance.collection("Users");
+  final hoursCollection =
+      FirebaseFirestore.instance.collection('Hours'); //accessing
   late List<bool> checkboxStates = []; //List to store checkbox states
   final hoursController =
       TextEditingController(); //for entering number of hours
@@ -33,8 +36,6 @@ class _ClassDetailsPage extends State<ClassDetailsPage> {
     super.initState();
     checkboxStates = []; // Initialize the list in initState
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -101,12 +102,14 @@ class _ClassDetailsPage extends State<ClassDetailsPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              AwardHoursPage(), // Replace HomePage with your actual homepage widget
-                        ),
-                      );
+                      print("Submit button pressed");
+                      updateFirestore();
+                      // Navigator.of(context).pushReplacement(
+                      //   MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         AwardHoursPage(), // Replace HomePage with your actual homepage widget
+                      //   ),
+                      // );
                     },
                     child: Text('Submit'),
                     style: ElevatedButton.styleFrom(
@@ -129,6 +132,68 @@ class _ClassDetailsPage extends State<ClassDetailsPage> {
         },
       ),
     );
+  }
+
+  // Function to update Firestore with selected learners and hours
+  void updateFirestore() async {
+    // Get the selected learners
+    print("Updating Firestore...");
+    final selectedLearners = checkboxStates
+        .asMap()
+        .entries
+        .where((entry) => entry.value)
+        .map((entry) => entry.key)
+        .toList();
+
+    // Get the number of hours from the text field
+    final numberOfHours = int.tryParse(hoursController.text) ?? 0;
+
+    // // Update Firestore for each selected learner
+    // for (int index in selectedLearners) {
+    //   final userData = (await usersCollection.doc(index.toString()).get()).data();
+
+    //   // Add the student to the 'Hours' collection
+    //   await hoursCollection.add({
+    //     'name': userData?['name'],
+    //     'surname': userData?['surname'],
+    //     'total_hours': numberOfHours,
+    //   });
+    // }
+
+    for (int index in selectedLearners) {
+      final userDoc = await usersCollection.doc(index.toString()).get();
+
+      if (userDoc.exists) {
+        // Only update if the user document exists
+        final userData = userDoc.data();
+
+        // Add the student to the 'Hours' collection
+        await hoursCollection.add({
+          'name': userData?['name'] ?? '', // Default to an empty string if null
+          'surname':
+              userData?['surname'] ?? '', // Default to an empty string if null
+          'total_hours': numberOfHours,
+        });
+      }
+    }
+    // Update Firestore for each selected learner
+    // for (int index in selectedLearners) {
+    //   final learnerDoc = await hoursCollection.doc(index.toString()).get();
+    //   final currentTotalHours = learnerDoc.data()?['total_hours'] ?? 0;
+
+    //   // Update the total_hours for the learner
+    //   await hoursCollection.doc(index.toString()).update({
+    //     'total_hours': currentTotalHours + numberOfHours,
+    //   });
+    // }
+
+    // Navigate to the AwardHoursPage
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => AwardHoursPage(),
+      ),
+    );
+    print("Firestore update completed.");
   }
 }
 

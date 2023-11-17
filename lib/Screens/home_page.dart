@@ -1,9 +1,9 @@
-import 'package:cce_reddam_house/Screens/profile_page.dart';
 import 'package:cce_reddam_house/Screens/log_hours.dart';
+
+import 'package:cce_reddam_house/Screens/profile_page.dart';
 import 'package:cce_reddam_house/Screens/learners_ttable.dart';
 import 'package:cce_reddam_house/Screens/policy.dart';
 import 'package:cce_reddam_house/components/drawer.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -48,6 +48,17 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
+  // void goToLogHours() {
+  //   Navigator.pop(context);
+
+  //   //go to a new page
+  //   Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => LogHoursPage(),
+  //       ));
+  // }
+
   //sign user out
   void signUserOut() {
     FirebaseAuth.instance.signOut();
@@ -59,7 +70,10 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(backgroundColor: Color.fromARGB(255, 3, 34, 59)),
         drawer: MyDrawer(
           onProfileTap: goToProfilePage,
-          onSignOut: signUserOut,
+          onSignOut: signUserOut, 
+          onSearch: () {  },
+          
+          //onLogHours: goToLogHours,
         ),
         body: SafeArea(
           child:

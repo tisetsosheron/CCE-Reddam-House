@@ -36,17 +36,17 @@ class _CustomDropdownState extends State<CustomDropdown> {
         icon: const Icon(Icons.arrow_drop_down_circle,
             color: Color.fromARGB(255, 141, 122, 16)),
         decoration: InputDecoration(
-            enabledBorder:  OutlineInputBorder(
+          labelText: widget.labelText, // Add this line for labelText
+          enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.white),
-              borderRadius: BorderRadius.circular(12)
-            ),
-            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12)),
+          focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Color.fromARGB(255, 141, 122, 16)),
-              borderRadius: BorderRadius.circular(12)
-            ),
-            fillColor: Colors.grey.shade200,
-            filled: true,
-            hintStyle: TextStyle(color: Colors.grey[500])),
+              borderRadius: BorderRadius.circular(12)),
+          fillColor: Colors.grey.shade200,
+          filled: true,
+          hintStyle: TextStyle(color: Colors.grey[500]),
+        ),
       ),
     );
   }

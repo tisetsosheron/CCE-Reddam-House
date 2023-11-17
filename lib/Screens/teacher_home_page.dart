@@ -1,15 +1,16 @@
-import 'package:cce_reddam_house/Screens/profile_page.dart';
+import 'package:cce_reddam_house/Screens/teacher_profile.dart';
 import 'package:cce_reddam_house/components/drawer.dart';
+import 'package:cce_reddam_house/screens/search_page.dart'; 
 import 'package:cce_reddam_house/Screens/view_receipts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:cce_reddam_house/Screens/uploadTimetable.dart';
 import 'package:cce_reddam_house/Screens/teacher_policy.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class TeacherHomePage extends StatefulWidget {
   final Function()? onTap;
-  const TeacherHomePage({super.key, this.onTap});
+  const TeacherHomePage({Key? key, this.onTap}) : super(key: key);
 
   @override
   State<TeacherHomePage> createState() => _TeacherHomePageState();
@@ -54,13 +55,22 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => ProfilePage(),
+          builder: (context) => TeacherProfilePage(),
         ));
   }
 
   //sign user out
   void signUserOut() {
     FirebaseAuth.instance.signOut();
+  }
+
+  void goToSearchPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SearchPage(),
+      ),
+    );
   }
 
   @override
@@ -70,11 +80,12 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
         drawer: MyDrawer(
           onProfileTap: goToProfilePage,
           onSignOut: signUserOut,
+          onSearch: goToSearchPage,
         ),
         body: SafeArea(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Padding(
+          const Padding(
               padding: EdgeInsets.symmetric(vertical: 26.0, horizontal: 36.0),
               child: Text("Dashboard",
                   style: TextStyle(
@@ -92,7 +103,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                 //child:
                 SizedBox(
                     width: 140.0,
-                    height: 180.0,
+                    height: 150.0,
                     child: Card(
                       color: Color(0xffa49831),
                       child: Padding(
@@ -110,7 +121,8 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                           ])),
                       //),
                     )),
-                InkWell(
+    
+            InkWell(
                   onTap: goToReceipts,
                   child: SizedBox(
                       width: 140.0,
@@ -134,7 +146,7 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                 ),
                 SizedBox(
                     width: 140.0,
-                    height: 180.0,
+                    height: 150.0,
                     child: Card(
                         color: Color(0xffa49831),
                         child: Padding(

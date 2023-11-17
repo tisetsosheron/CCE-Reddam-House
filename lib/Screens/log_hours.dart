@@ -160,7 +160,7 @@ class _LogHoursPageState extends State<LogHoursPage> {
               icon: Icon(Icons.arrow_back), // Use the arrow back icon
               onPressed: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => LoginPage(), // Navigate to HomePage
+                  builder: (context) => HomePage(), // Navigate to HomePage
                 ));
               })),
       backgroundColor: Colors.white,

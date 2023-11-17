@@ -1,6 +1,8 @@
 import 'package:cce_reddam_house/Screens/profile_page.dart';
 import 'package:cce_reddam_house/components/drawer.dart';
+import 'package:cce_reddam_house/Screens/view_receipts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cce_reddam_house/Screens/teacher_policy.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,34 @@ class TeacherHomePage extends StatefulWidget {
 }
 
 class _TeacherHomePageState extends State<TeacherHomePage> {
-  final user = FirebaseAuth.instance.currentUser!;
+  // void goToUploadPage() {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => TimeTablePage(),
+  //     ),
+  //   );
+  // }
+
+  void goToPolicyPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TeacherPolicyPage(),
+      ),
+    );
+  }
+
+  void goToReceipts() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => VerifyReceiptsPage(),
+      ),
+    );
+  }
+
+  final user = FirebaseAuth.instance.currentUser;
 
   //navigate to ptofile page
   void goToProfilePage() {
@@ -70,31 +99,34 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                             SizedBox(height: 20.0),
                             Text("Timetable",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Color.fromARGB(255, 3, 34, 59),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18.0,
                                 )),
                           ])),
                     )),
-                SizedBox(
-                    width: 140.0,
-                    height: 180.0,
-                    child: Card(
-                      color: Color(0xffa49831),
-                      child: Padding(
-                          padding: EdgeInsets.all(20.0),
-                          child: Column(children: [
-                            Image.asset('lib/images/receipt.png',
-                                width: 40.0, height: 40.0),
-                            SizedBox(height: 20.0),
-                            Text("Receipts",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18.0,
-                                ))
-                          ])),
-                    )),
+                InkWell(
+                  onTap: goToReceipts,
+                  child: SizedBox(
+                      width: 140.0,
+                      height: 180.0,
+                      child: Card(
+                        color: Color(0xffa49831),
+                        child: Padding(
+                            padding: EdgeInsets.all(20.0),
+                            child: Column(children: [
+                              Image.asset('lib/images/receipt.png',
+                                  width: 40.0, height: 40.0),
+                              SizedBox(height: 20.0),
+                              Text("Receipts",
+                                  style: TextStyle(
+                                    color: Color.fromARGB(255, 3, 34, 59),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18.0,
+                                  ))
+                            ])),
+                      )),
+                ),
                 SizedBox(
                     width: 140.0,
                     height: 180.0,
@@ -103,34 +135,36 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                         child: Padding(
                             padding: EdgeInsets.all(20.0),
                             child: Column(children: [
-                              Image.asset('lib/images/award.png',
+                              Image.asset('lib/images/clock.png',
                                   width: 40.0, height: 40.0),
                               SizedBox(height: 20.0),
-                              Text("Awards",
+                              Text("Hours",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Color.fromARGB(255, 3, 34, 59),
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18.0,
                                   ))
                             ])))),
-                SizedBox(
-                    width: 140.0,
-                    height: 180.0,
-                    child: Card(
-                        color: Color(0xffa49831),
-                        child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(children: [
-                              Image.asset('lib/images/policy.png',
-                                  width: 40.0, height: 40.0),
-                              SizedBox(height: 20.0),
-                              Text("Policy Info",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0,
-                                  ))
-                            ]))))
+                InkWell(
+                    onTap: goToPolicyPage,
+                    child: SizedBox(
+                        width: 140.0,
+                        height: 180.0,
+                        child: Card(
+                            color: Color(0xffa49831),
+                            child: Padding(
+                                padding: EdgeInsets.all(20.0),
+                                child: Column(children: [
+                                  Image.asset('lib/images/policy.png',
+                                      width: 40.0, height: 40.0),
+                                  SizedBox(height: 20.0),
+                                  Text("Ts & Cs",
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 3, 34, 59),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0,
+                                      ))
+                                ]))))),
               ])))
         ])));
   }

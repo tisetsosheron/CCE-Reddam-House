@@ -1,12 +1,6 @@
-import 'package:cce_reddam_house/Screens/authPage.dart';
-import 'package:cce_reddam_house/Screens/displayClass.dart';
-import 'package:cce_reddam_house/Screens/register_page.dart';
-import 'package:cce_reddam_house/Screens/loginPage.dart';
-import 'package:cce_reddam_house/Screens/uploadTimetable.dart';
 import 'package:cce_reddam_house/Screens/award_page.dart';
-import 'package:cce_reddam_house/Screens/award_class.dart';
+import 'package:cce_reddam_house/Screens/displayClass.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import '../components/drop_down.dart';
 
@@ -47,7 +41,7 @@ class _AwardClassPageState extends State<AwardClassPage> {
           const SizedBox(
             height: 10,
           ),
-          Text(
+          const Text(
             'Please select a grade',
             style: TextStyle(
               color: Colors.black,
@@ -70,7 +64,7 @@ class _AwardClassPageState extends State<AwardClassPage> {
 
           const SizedBox(height: 10),
 
-          Text(
+          const Text(
             'Please select a class',
             style: TextStyle(
               color: Colors.black,

@@ -1,8 +1,9 @@
-import 'package:cce_reddam_house/Screens/log_hours.dart';
-
-import 'package:cce_reddam_house/Screens/profile_page.dart';
 import 'package:cce_reddam_house/Screens/learners_ttable.dart';
+import 'package:cce_reddam_house/Screens/log_hours.dart';
+import 'package:cce_reddam_house/Screens/loginPage.dart';
 import 'package:cce_reddam_house/Screens/policy.dart';
+import 'package:cce_reddam_house/Screens/profile_page.dart';
+import 'package:cce_reddam_house/Screens/student_award_page.dart';
 import 'package:cce_reddam_house/components/drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +25,29 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void goToAwardsPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AwardsPage(),
+      ),
+    );
+  }
+
   void goToPolicyPage() {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => PolicyPage(),
+      ),
+    );
+  }
+
+  void goToTimetablePage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LearnersTtablePage(),
       ),
     );
   }
@@ -48,37 +67,31 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 
-  // void goToLogHours() {
-  //   Navigator.pop(context);
-
-  //   //go to a new page
-  //   Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) => LogHoursPage(),
-  //       ));
-  // }
-
   //sign user out
   void signUserOut() {
     FirebaseAuth.instance.signOut();
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(backgroundColor: Color.fromARGB(255, 3, 34, 59)),
+        appBar: AppBar(
+          backgroundColor: Color(0xffa49831),
+        ),
         drawer: MyDrawer(
           onProfileTap: goToProfilePage,
-          onSignOut: signUserOut, 
-          onSearch: () {  },
-          
-          //onLogHours: goToLogHours,
+          onSignOut: signUserOut,
+          onSearch: () {},
         ),
         body: SafeArea(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
+            const Padding(
                 padding: EdgeInsets.symmetric(vertical: 26.0, horizontal: 36.0),
                 child: Text("Dashboard",
                     style: TextStyle(
@@ -103,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                                 Image.asset('lib/images/ttable.png',
                                     width: 40.0, height: 40.0),
                                 SizedBox(height: 20.0),
-                                Text("Timetable",
+                                const Text("Upcoming Events",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -125,7 +138,29 @@ class _HomePageState extends State<HomePage> {
                                 Image.asset('lib/images/clock.png',
                                     width: 40.0, height: 40.0),
                                 SizedBox(height: 20.0),
-                                Text("Log Hours",
+                                const Text("Log Hours",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                    ))
+                              ])),
+                        )),
+                  ),
+                  InkWell(
+                    onTap: goToAwardsPage,
+                    child: SizedBox(
+                        width: 140.0,
+                        height: 180.0,
+                        child: Card(
+                          color: Color(0xffa49831),
+                          child: Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: Column(children: [
+                                Image.asset('lib/images/clock.png',
+                                    width: 40.0, height: 40.0),
+                                SizedBox(height: 20.0),
+                                const Text("Awards",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
@@ -147,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                                     Image.asset('lib/images/policy.png',
                                         width: 40.0, height: 40.0),
                                     SizedBox(height: 20.0),
-                                    Text("Policy Info",
+                                    const Text("Policy Info",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,

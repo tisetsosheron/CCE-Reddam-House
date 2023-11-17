@@ -1,5 +1,4 @@
 import 'package:cce_reddam_house/Screens/home_page.dart';
-import 'package:cce_reddam_house/Screens/teacher_register.dart';
 import 'package:cce_reddam_house/components/myButton.dart';
 import 'package:cce_reddam_house/components/textField.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

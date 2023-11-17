@@ -39,6 +39,12 @@ class _LoginPageState extends State<LoginPage> {
           email: emailController.text, password: passwordController.text);
       //Pop loading circle
       Navigator.pop(context);
+
+      // Navigate to the homepage after successful login
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => HomePage()),
+      // );
     } on FirebaseAuthException catch (e) {
       //Pop loading circle
       Navigator.pop(context);
@@ -121,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                             return ForgotPasswordPage();
                           }));
                         },
-                        child: Text('Forgot Password?',
+                        child: const Text('Forgot Password?',
                             style: TextStyle(
                                 color: Colors.blue,
                                 fontWeight: FontWeight.bold)),
@@ -153,28 +159,26 @@ class _LoginPageState extends State<LoginPage> {
               //   ],
               // ),
 
-          
-
               const SizedBox(height: 25),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Student? ',
-                  style:TextStyle(fontSize: 15)),
+                  Text('Student? ', style: TextStyle(fontSize: 15)),
                   SizedBox(height: 10),
                   GestureDetector(
-                      onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
                         return RegisterPage(); // Navigate to student registration page
                       }));
                     },
-
                     child: const Text(
                       'Register here',
                       style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.blue, fontWeight: FontWeight.bold),
+                          fontSize: 15,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -182,10 +186,10 @@ class _LoginPageState extends State<LoginPage> {
 
               const SizedBox(height: 25),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
-                  children: const [
+                  children: [
                     Expanded(
                         child: Divider(
                             thickness: 0.5,
@@ -209,22 +213,21 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Teacher? ',
-                  style:TextStyle(fontSize: 15)),
+                  const Text('Teacher? ', style: TextStyle(fontSize: 15)),
                   const SizedBox(height: 10),
                   GestureDetector(
-                      onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
                         return TeacherRegisterPage(); // Navigate to student registration page
                       }));
                     },
-
                     child: const Text(
                       'Register here',
                       style: TextStyle(
-                        fontSize: 15,
-                          color: Colors.blue, fontWeight: FontWeight.bold),
-    
+                          fontSize: 15,
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  final user = FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser;
 
   //navigate to ptofile page
   void goToProfilePage() {

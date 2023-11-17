@@ -58,16 +58,17 @@ class DefaultFirebaseOptions {
     appId: '1:812177127629:android:04ae8a707fafce72e6d184',
     messagingSenderId: '812177127629',
     projectId: 'reddamhouse-afb7a',
-    storageBucket: 'reddamhouse-afb7a.appspot.com',
+    storageBucket: 'reddamhouse-afb7a.appspot.com'
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCyvBdZPevvpn26gAlNHepxiVBIqf8qXNM',
-    appId: '1:812177127629:ios:09cb827b6104959be6d184',
-    messagingSenderId: '812177127629',
-    projectId: 'reddamhouse-afb7a',
-    storageBucket: 'reddamhouse-afb7a.appspot.com',
     iosBundleId: 'com.example.cceReddamHouse',
+    appId: '1:812177127629:ios:09cb827b6104959be6d184',
+    storageBucket: 'reddamhouse-afb7a.appspot.com',
+    messagingSenderId: '812177127629',
+    iosClientId: 'undefined',
+    projectId: 'reddamhouse-afb7a'
   );
 
   static const FirebaseOptions macos = FirebaseOptions(

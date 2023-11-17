@@ -1,5 +1,7 @@
 import 'package:cce_reddam_house/Screens/profile_page.dart';
 import 'package:cce_reddam_house/Screens/log_hours.dart';
+import 'package:cce_reddam_house/Screens/learners_ttable.dart';
+import 'package:cce_reddam_house/Screens/policy.dart';
 import 'package:cce_reddam_house/components/drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,9 +24,18 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void goToPolicyPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PolicyPage(),
+      ),
+    );
+  }
+
   final user = FirebaseAuth.instance.currentUser;
 
-  //navigate to ptofile page
+  //navigate to profile page
   void goToProfilePage() {
     //pop the menu drawer
     Navigator.pop(context);
@@ -65,25 +76,28 @@ class _HomePageState extends State<HomePage> {
                 padding: EdgeInsets.all(18.0),
                 child: Center(
                     child: Wrap(spacing: 20.0, runSpacing: 20.0, children: [
-                  SizedBox(
-                      width: 140.0,
-                      height: 180.0,
-                      child: Card(
-                        color: Color(0xffa49831),
-                        child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(children: [
-                              Image.asset('lib/images/ttable.png',
-                                  width: 40.0, height: 40.0),
-                              SizedBox(height: 20.0),
-                              Text("Timetable",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18.0,
-                                  )),
-                            ])),
-                      )),
+                  InkWell(
+                    onTap: goToTimetablePage,
+                    child: SizedBox(
+                        width: 140.0,
+                        height: 180.0,
+                        child: Card(
+                          color: Color(0xffa49831),
+                          child: Padding(
+                              padding: EdgeInsets.all(20.0),
+                              child: Column(children: [
+                                Image.asset('lib/images/ttable.png',
+                                    width: 40.0, height: 40.0),
+                                SizedBox(height: 20.0),
+                                Text("Timetable",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18.0,
+                                    )),
+                              ])),
+                        )),
+                  ),
                   InkWell(
                     onTap: goToLogHoursPage,
                     child: SizedBox(
@@ -106,42 +120,26 @@ class _HomePageState extends State<HomePage> {
                               ])),
                         )),
                   ),
-                  SizedBox(
-                      width: 140.0,
-                      height: 180.0,
-                      child: Card(
-                          color: Color(0xffa49831),
-                          child: Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Column(children: [
-                                Image.asset('lib/images/award.png',
-                                    width: 40.0, height: 40.0),
-                                SizedBox(height: 20.0),
-                                Text("Awards",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0,
-                                    ))
-                              ])))),
-                  SizedBox(
-                      width: 140.0,
-                      height: 180.0,
-                      child: Card(
-                          color: Color(0xffa49831),
-                          child: Padding(
-                              padding: EdgeInsets.all(20.0),
-                              child: Column(children: [
-                                Image.asset('lib/images/policy.png',
-                                    width: 40.0, height: 40.0),
-                                SizedBox(height: 20.0),
-                                Text("Policy Info",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.0,
-                                    ))
-                              ]))))
+                  InkWell(
+                      onTap: goToPolicyPage,
+                      child: SizedBox(
+                          width: 140.0,
+                          height: 180.0,
+                          child: Card(
+                              color: Color(0xffa49831),
+                              child: Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Column(children: [
+                                    Image.asset('lib/images/policy.png',
+                                        width: 40.0, height: 40.0),
+                                    SizedBox(height: 20.0),
+                                    Text("Policy Info",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18.0,
+                                        ))
+                                  ]))))),
                 ])))
           ]),
         ));
